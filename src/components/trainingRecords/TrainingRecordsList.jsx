@@ -1,0 +1,18 @@
+import TrainingRecordsItem from './TrainingRecordsItem';
+
+function TrainingRecordsList(props) {
+
+    const deleteItemFromThisList = (e) => {
+        props.deleteItem(e);
+    };
+    const editItemFromThisList = (e) => {
+        props.editItem(e);
+    };
+
+    return (
+        <div className="training-table">
+            {props.data.map(item => <TrainingRecordsItem item={item} key={item.date} deleteItemFromList={deleteItemFromThisList} onEditItemFromList={editItemFromThisList} />)}
+        </div>
+    )
+}
+export default TrainingRecordsList;
