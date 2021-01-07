@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 function TrainingRecordsItem (props) {
     const { item } = props;
 
@@ -9,11 +11,12 @@ function TrainingRecordsItem (props) {
         e.preventDefault();
         props.onEditItemFromList(item);
     }
+
     return (
         <div className="training-table__row">
             <div className="training-table__cell">
                 <span className="training-table__date">
-                    {item.date}
+                    {moment(item.date).format("LL")}
                 </span>
             </div>
             <div className="training-table__cell">

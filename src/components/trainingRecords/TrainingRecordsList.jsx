@@ -8,10 +8,14 @@ function TrainingRecordsList(props) {
     const editItemFromThisList = (e) => {
         props.editItem(e);
     };
+    const sortedArray = props.data.sort(function(a, b) {
+        return a.date - b.date;
+    })
 
     return (
         <div className="training-table">
-            {props.data.map(item => <TrainingRecordsItem item={item} key={item.date} deleteItemFromList={deleteItemFromThisList} onEditItemFromList={editItemFromThisList} />)}
+            {sortedArray.map(item => <TrainingRecordsItem item={item} key={item.date} deleteItemFromList={deleteItemFromThisList} onEditItemFromList={editItemFromThisList} />)
+            }
         </div>
     )
 }

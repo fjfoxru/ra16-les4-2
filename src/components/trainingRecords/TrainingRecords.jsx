@@ -18,13 +18,18 @@ function TrainingRecords () {
 
     const onAddNewTraining = (e) => {
         setTrainingRecord(function (state) {
-            const newTraining = state.find(el => el.date === e.date);
-            if (newTraining) {
-                newTraining.km += +e.km;
-                return state.slice();
+            const repeatTraining = state.findIndex(el => el.date === +new Date(e.date));
+            if (repeatTraining !== -1) {
+                const kmOld = state[repeatTraining].km;
+                const newState = state.slice();
+                newState.splice(repeatTraining, 1);
+                return [...newState, {
+                    'date': +new Date(e.date),
+                    'km': +kmOld + +e.km,
+                }]
             } else {
                 return [...state, {
-                    'date': e.date,
+                    'date': +new Date(e.date),
                     'km': +e.km,
                 }]
             }
@@ -32,12 +37,9 @@ function TrainingRecords () {
 
         });
     }
-    
-
     const editItemFromList = (e) => {
         setEditTraining(editTraining => ({...e}));
     }
-
     return (
         <>
         <TrainingRecordsForm data={editTraining} onAddTraining={onAddNewTraining}/>
